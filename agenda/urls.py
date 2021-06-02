@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.views.generic.base import View
 from core import views
 from django.contrib import admin
 from django.urls import path
@@ -21,15 +22,17 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('evento/local/<str:nome_evento>/', views.localEvento),
-    path('evento/descricao/<str:nome_evento>/', views.descricaoEvento),
-    path('evento/data_evento/<str:nome_evento>/', views.dataEvento),
-    path('evento/data_criacao/<str:nome_evento>/', views.dataCriacao),
-    path('evento/user/<str:nome_evento>/', views.userEvento),
-
     path('agenda/', views.lista_eventos),
-    path('', RedirectView.as_view(url='/agenda/'))
+    path('', RedirectView.as_view(url='/agenda/')),
+    path('login/', views.login_user),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user)
     # path('', views.index)
+    # path('evento/local/<str:nome_evento>/', views.localEvento),
+    # path('evento/descricao/<str:nome_evento>/', views.descricaoEvento),
+    # path('evento/data_evento/<str:nome_evento>/', views.dataEvento),
+    # path('evento/data_criacao/<str:nome_evento>/', views.dataCriacao),
+    # path('evento/user/<str:nome_evento>/', views.userEvento),
 
 
 ]
